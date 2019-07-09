@@ -1,0 +1,13 @@
+FROM tensorflow/tensorflow:latest-gpu-py3
+
+# Setup the environment path
+ENV PATH="/opt/program:${PATH}"
+
+# Install all the packages required by the project
+# Check the tensorflow version of the image on docker-hub and add compatible requirements.
+ADD requirements-gpu.txt /
+RUN pip3 install -r requirements-gpu.txt
+
+# Set up the program in the image
+COPY src /opt/program
+WORKDIR /opt/program
